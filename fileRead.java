@@ -8,9 +8,11 @@ import java.lang.Exception;
 class FileOpen {
 
 public FileOpen(){
-
+// A constructor 
 }
-	void ReadFile(String filename){
+
+	void ErrorChecking(String filename){
+		// A function that handles errors
 		File theFile = new File(filename);
 
 		if(!theFile.exists()){
@@ -22,19 +24,24 @@ public FileOpen(){
 			System.out.println("Could not read");
 			System.exit(-2);
 		}
+	}
+	void ReadFile(String filename){
 
+		// reads the file and displays the words in each line
 		try(BufferedReader bufferRead = new BufferedReader(new FileReader(filename))){ 
 		String theLine;
-		
-		while((theLine = bufferRead.readLine()) != null) {
-			System.out.println(theLine);
+		while((theLine = bufferRead.readLine()) != null) { // Keep reading as long as there is stuff to read
+			
+			String[] wordArray = theLine.split("\\s+"); // Spilt into an array of words
+			int wordCount = wordArray.length; // length of the array is the number of words in the line 
+
+			System.out.println(wordCount + " : " + theLine); // Prints number of words and the line
 
 
 		}
 
-
 		}
-		catch(Exception ex){
+		catch(Exception ex){ // a catch all
 			System.out.println(("Exception occurred. ") + ex.getMessage());
 			System.exit(-1);
 		}
@@ -44,12 +51,13 @@ public FileOpen(){
 
 	public static void main(String[] args) {
 
-		if(args.length == 0){
+		if(args.length == 0){ // Checks for no filename entered 
 			System.out.println("No filename specefied");
 			System.exit(-3);
 		}
-		String filename = args[0];
-		FileOpen opener = new FileOpen();
-		opener.ReadFile(filename);		
+		String filename = args[0]; // First argument is the filename
+		FileOpen opener = new FileOpen(); //New object to open the file
+		opener.ErrorChecking(filename); // Error checking
+		opener.ReadFile(filename);		// Reads file and displays info
 }
 }
