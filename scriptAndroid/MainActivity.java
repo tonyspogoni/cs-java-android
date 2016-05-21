@@ -20,17 +20,16 @@ public class MainActivity extends AppCompatActivity {
     public void changePage(View v) {
         EditText book = (EditText) findViewById(R.id.book);
         EditText verse = (EditText) findViewById(R.id.verse);
-        EditText chap = (EditText) findViewById(R.id.chap);
-        Intent i = new Intent(MainActivity.this, Main2Activity.class);
+        EditText chap = (EditText) findViewById(R.id.chap); //Gets the text from the different boxes
+
+        Intent i = new Intent(MainActivity.this, Main2Activity.class); //Creates an intent of the second activity
+
         i.putExtra("book", book.getText().toString());
         i.putExtra("verse",verse.getText().toString());
         i.putExtra("chap", chap.getText().toString());
+        // Puts the text into the intent
         startActivity(i);
-
+        // Starts the second activity
 
     }
 }
-
-
-
-
